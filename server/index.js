@@ -18,13 +18,20 @@ let userMesssageFormat = {
   role: "user",
   message: "",
   id: "",
+  time: ""
 };
 
 let chatMesssageFormat = {
   role: "chat",
   message: "",
   id: "",
+  time: ""
 };
+
+const addZero = (i) => {
+  if (i < 10) {i = "0" + i}
+  return i;
+}
 
 const PORT = 5000;
 app.use(express.urlencoded({ extended: true }));
@@ -46,8 +53,15 @@ app.post("/botMessage", cors(), async (req, res) => {
   console.log(data);
   console.log(data.message);
 
+  let date = new Date();
+  let hour = addZero(date.getHours());
+  let minut = addZero(date.getMinutes());
+
+  let time = hour + ":" + minut;
+
   chatMesssageFormat.message = data.message;
   chatMesssageFormat.id = new Date().getUTCMilliseconds();
+  chatMesssageFormat.time = time
 
   io.emit("chatSocket", chatMesssageFormat);
 
@@ -60,10 +74,17 @@ app.post("/botMessage", cors(), async (req, res) => {
 app.post("/userMessage", cors(), async (req, res) => {
   const data = req.body;
 
+  let date = new Date();
+  let hour = addZero(date.getHours());
+  let minut = addZero(date.getMinutes());
+
+  let time = hour + ":" + minut;
+
   console.log(data);
   console.log(data.message);
   userMesssageFormat.message = data.message;
   userMesssageFormat.id = new Date().getUTCMilliseconds();
+  userMesssageFormat.time = time
 
   io.emit("userSocket", userMesssageFormat);
 

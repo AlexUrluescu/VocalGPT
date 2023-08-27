@@ -39,14 +39,30 @@
 
 
 .user_messages{
-  background-color: aqua;
+  /* background-color: aqua; */
   display: flex;
   justify-content: flex-end;
 }
 
+.all_user_messages{
+  background-color: aqua;
+}
+
+.user_time{
+  display: flex;
+  justify-content: flex-end;
+}
 
 .bot_messages{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.all_bot_messages{
   background-color: burlywood;
+}
+
+.bot_time{
   display: flex;
   justify-content: flex-start;
 }

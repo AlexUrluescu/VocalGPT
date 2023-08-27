@@ -93,12 +93,18 @@ function App() {
             ) : (
               <div>
                 {user.role === "user" ? (
-                  <div className="user_messages">
-                    {user.role}: {user.message}
+                  <div className="all_user_messages">
+                    <div className="user_messages">
+                      {user.role}: {user.message}
+                    </div>
+                    <div className="user_time">{user.time}</div>
                   </div>
                 ) : (
-                  <div className="bot_messages">
-                    {user.role}: {user.message}
+                  <div className="all_bot_messages">
+                    <div className="bot_messages">
+                      {user.role}: {user.message}
+                    </div>
+                    <div className="bot_time">{user.time}</div>
                   </div>
                 )}
               </div>
