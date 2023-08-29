@@ -37,32 +37,83 @@
   }
 }
 
-
-.user_messages{
+.user_messages {
   /* background-color: aqua; */
   display: flex;
   justify-content: flex-end;
+  width: 40%;
 }
 
-.all_user_messages{
-  background-color: aqua;
+.all_user_messages {
+  /* background-color: aqua; */
+
+  display: flex;
+  margin: 1em;
 }
 
-.user_time{
+.userContent {
+  background-color: orange;
+  width: 40%;
+  padding: 10px;
+  border-radius: 15px;
+  color: white;
+  font-size: 25px;
+}
+
+.userTime {
   display: flex;
   justify-content: flex-end;
+
+  user-select: none;
+  font-size: 15px;
+  color: rgb(216, 216, 216);
 }
 
-.bot_messages{
+::selection {
+  color: white;
+  background: black;
+}
+
+.userMessage {
+  display: flex;
+  justify-content: flex-end;
+
+  text-align: right;
+}
+
+.empty {
+  background-color: transparent;
+  width: 60%;
+}
+
+.all_bot_messages {
+  /* background-color: burlywood; */
+  margin: 1em;
+}
+
+.botContent {
+  background-color: gray;
+  width: 40%;
+  padding: 10px;
+  border-radius: 15px;
+
+  color: white;
+  font-size: 25px;
+}
+
+.botMessage {
   display: flex;
   justify-content: flex-start;
+
+  text-align: left;
+
 }
 
-.all_bot_messages{
-  background-color: burlywood;
-}
-
-.bot_time{
+.botTime {
   display: flex;
   justify-content: flex-start;
+
+  user-select: none;
+  font-size: 15px;
+  color: gainsboro;
 }
