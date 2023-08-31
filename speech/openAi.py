@@ -22,6 +22,8 @@ class chatGPT:
             1. Ask the name of the candidate.
             2. Ask where the candidate lives.
             3. Ask about the candidate's skills.
+            4. Ask about how much experience has on that skills
+            
 
             MAKE SURE YOU TAKE THE NAME AND THE LOCATION OF THE CANDIDATE. aFTER YOU TAKE THIS 2 THINGS, YOU WILL ASK HIM FOR HIS SKILLS AND NEVER ASK FOR HIS NAME AND LOCATION AGAIN
             
