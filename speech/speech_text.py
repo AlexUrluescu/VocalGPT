@@ -24,6 +24,7 @@ def sendBotMessage(botText):
 
 
 def speech_recognize_once_with_auto_language_detection_from_mic():
+    
     chatgpt = chatGPT()
     voice =  Voice()
 
@@ -32,7 +33,7 @@ def speech_recognize_once_with_auto_language_detection_from_mic():
 
     # create the auto detection language configuration with the potential source language candidates
     auto_detect_source_language_config = \
-        speechsdk.languageconfig.AutoDetectSourceLanguageConfig(languages=["en-US"])
+        speechsdk.languageconfig.AutoDetectSourceLanguageConfig(languages=["en-US", "ro-RO"])
     speech_recognizer = speechsdk.SpeechRecognizer(
         speech_config=speech_config, auto_detect_source_language_config=auto_detect_source_language_config)
     result = speech_recognizer.recognize_once()
@@ -41,14 +42,7 @@ def speech_recognize_once_with_auto_language_detection_from_mic():
     if result.reason == speechsdk.ResultReason.RecognizedSpeech:
         auto_detect_source_language_result = speechsdk.AutoDetectSourceLanguageResult(result)
         print("Recognized: {} in language {}".format(result.text, auto_detect_source_language_result.language))
-        # prompt = """Esti un asistent,rolul tau este de a raspunde la intrebari userului si sa returnezi un json pe limba: """ + auto_detect_source_language_result.language + """.  
-        # Ai urmatoarele informatii despre urmatoarele persoane: Alex are 20 ani, locuiesti in Sibiu si ii place sa calatoreasca.
-        # Returneaza-mi un singur raspuns sub forma de JSON. Exemplu de raspuns in JSON: {
-        #             "question":"Ce știi despre Alex?",
-        #             "answer":"Alex are 20 ani, locuieste in Sibiu si ii place sa calatoreasca"
-        # };"""
-        
-        # print(prompt)
+
         print(result.text)
         language = auto_detect_source_language_result.language
         voice_language = ""
@@ -62,10 +56,20 @@ def speech_recognize_once_with_auto_language_detection_from_mic():
             voice_language = "es-ES-ElviraNeural"
 
         sendUserMessage(result.text)
-        chat_response = chatgpt.model_response(result.text, language)
-        print(f"Model's answer: {chat_response['choices'][0]['text']}")
-        sendBotMessage(chat_response['choices'][0]['text'])
-        voice.text_to_speech(chat_response['choices'][0]['text'], voice_language)
+        chatgpt.add_user_question(result.text)
+        chat_response = chatgpt.answering()
+        messages = chatgpt.add_chat_answer(chat_response)
+        print(messages)
+        print(type(result.text))
+      
+        print(chat_response)
+        print(type(chat_response))
+
+        print(f"Model's answer: {chat_response}")
+
+        sendBotMessage(chat_response)
+        voice.text_to_speech(chat_response, voice_language)
+
 
     elif result.reason == speechsdk.ResultReason.NoMatch:
         print("No speech could be recognized")
@@ -76,7 +80,6 @@ def speech_recognize_once_with_auto_language_detection_from_mic():
             print("Error details: {}".format(cancellation_details.error_details))
 
 
-# chatgpt = ChatGPT()
 
 while True:
     speech_recognize_once_with_auto_language_detection_from_mic()
