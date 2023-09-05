@@ -77,7 +77,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div className="chat">
         {chatMessages.map((user, index) => (
           <div key={index}>
             {user.message === "" ? (
