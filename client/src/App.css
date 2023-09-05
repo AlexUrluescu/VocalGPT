@@ -38,12 +38,10 @@
 }
 
 .chat{
-  background-color: rgb(198, 253, 234);
+  background-color: white;
   width: 800px;
   padding: 20px;
   margin: 40px auto;
-  border-radius: 20px;
-  border: 4px solid rgb(0, 109, 93);
 }
 
 .user_messages {
