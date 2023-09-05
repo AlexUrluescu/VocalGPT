@@ -117,3 +117,26 @@
   font-size: 15px;
   color: gainsboro;
 }
+
+
+.container {
+  font-family: sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 100vh; */
+  background: green;
+  width: 400px;
+}
+
+.typewriter{
+  background-color: red;
+}
+
+.element {
+  animation-duration: 2s; /* Animation takes 2 seconds to complete */
+  transition-duration: 0.5s; /* Transition takes 0.5 seconds to complete */
+}

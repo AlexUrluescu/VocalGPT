@@ -1,6 +1,8 @@
 import "./App.css";
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
+// import Typewriter from "./Typewriter";
+import Typewriter from "typewriter-effect";
 
 const url = "http://localhost:5000";
 
@@ -27,16 +29,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const fetchChat = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/chat");
-        const data = await res.json();
-
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
 
     const fetchUserSocket = () => {
       try {
@@ -67,7 +59,7 @@ function App() {
 
     fetchUserSocket();
     fetchBotSocket();
-  }, [socket]);
+  }, []);
 
   useEffect(() => {
     if (botMessage.message === "") {
@@ -96,7 +88,16 @@ function App() {
                   <div className="all_user_messages">
                     <div className="empty"></div>
                     <div className="userContent">
-                      <div className="userMessage">{user.message}</div>
+                      <div className="userMessage">
+                        <Typewriter
+                          onInit={(typewriter) => {
+                            typewriter.typeString(user.message).start();
+                          }}
+                          options={{
+                            delay: 50,
+                          }}
+                        />
+                      </div>
                       <div className="userTime">{user.time}</div>
                     </div>
                   </div>
@@ -104,7 +105,16 @@ function App() {
                   <div className="all_bot_messages">
                     <div className="empty"></div>
                     <div className="botContent">
-                      <div className="botMessage">{user.message}</div>
+                      <div className="botMessage">
+                        <Typewriter
+                          onInit={(typewriter) => {
+                            typewriter.typeString(user.message).start();
+                          }}
+                          options={{
+                            delay: 50,
+                          }}
+                        />
+                      </div>
                       <div className="botTime">{user.time}</div>
                     </div>
                   </div>
